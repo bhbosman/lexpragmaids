@@ -1,4 +1,4 @@
-package lexpragma
+package lexpragmaids
 
 type Lexem struct {
 	TokenName string
@@ -15,26 +15,26 @@ type LexemCollection struct {
 	LexemValues []Lexem
 }
 
-func NewLexemEofValue() Lexem {
+func NewLexemEofValue() (*Lexem, error) {
 
-	return Lexem{
+	return &Lexem{
 		Eof: true,
-	}
+	}, nil
 }
 
-func NewLexemNoValue(typeKind int, tokenName func(int) string) Lexem {
-	return Lexem{
+func NewLexemNoValue(typeKind int, tokenName func(int) string) (*Lexem, error) {
+	return &Lexem{
 		TypeKind:  typeKind,
 		TokenName: tokenName(typeKind),
 		Eof:       false,
-	}
+	}, nil
 }
 
-func NewLexemStringValue(typeKind int, tokenName func(int) string, stringValue string) Lexem {
-	return Lexem{
+func NewLexemStringValue(typeKind int, tokenName func(int) string, stringValue string) (*Lexem, error) {
+	return &Lexem{
 		TypeKind:  typeKind,
 		TokenName: tokenName(typeKind),
 		Value:     stringValue,
 		Eof:       false,
-	}
+	}, nil
 }
